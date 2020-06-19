@@ -6,4 +6,5 @@ from api.models import Salaries
 class SalariesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Salaries
-        fields = '__all__'
+        fields = ["name", "position", "department", "salary"] #avoids asking for ID while posting
+    
