@@ -1,12 +1,12 @@
-from rest_framework.generics import GenericAPIView, ListCreateAPIView
-from rest_framework.mixins import CreateModelMixin, UpdateModelMixin
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 
 from api.models import Salaries
 from api.serializers import SalariesSerializer
 
 
-class SalariesAPIView(CreateModelMixin, UpdateModelMixin, GenericAPIView):
+class SalariesAPIView(CreateModelMixin, GenericAPIView):
     queryset = Salaries.objects.all()
     serializer_class = SalariesSerializer
 
