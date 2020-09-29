@@ -1,5 +1,7 @@
 from rest_framework.generics import GenericAPIView
 from api.models import Salaries
+from rest_framework import serializers, status
+from rest_framework.response import Response
 from api.serializers import SalariesSerializer
 
 
@@ -14,3 +16,13 @@ class SalariesAPIView(GenericAPIView):
             queryset = self.paginate_queryset(queryset=self.queryset.filter(name__icontains=name))
         serializer = SalariesSerializer(instance=queryset, many=True)
         return self.get_paginated_response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        salary = Salaries.objects.create(**request.data)
+
+        serializer = SalariesSerializer(instance=salary, context={'request': request})
+        return Response(serializer.data)
+
+  
+
+
