@@ -1,7 +1,12 @@
 from rest_framework.generics import GenericAPIView
+<<<<<<< HEAD
 from api.models import Salaries
 from rest_framework import serializers, status
 from rest_framework.response import Response
+=======
+
+from api.models import Salaries
+>>>>>>> 2ae3606cff64698c277fb1c11ebc80dbae1fad17
 from api.serializers import SalariesSerializer
 
 
@@ -38,9 +43,4 @@ class SalariesAPIView(GenericAPIView):
 
             serializer = SalariesSerializer(instance=salary, context={'request': request})
             return Response(serializer.data)
-
-
-
-  
-
 
