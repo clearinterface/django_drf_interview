@@ -23,6 +23,21 @@ class SalariesAPIView(GenericAPIView):
         serializer = SalariesSerializer(instance=salary, context={'request': request})
         return Response(serializer.data)
 
+    def put(self, request, *args, **kwargs):
+        id = request.query_params.get("id")
+
+        try:
+            salary = Salaries.objects.get(id=id)
+            for k,v in request.data.items():
+                setattr(salary, k, v)
+            salary.save()
+            serializer = SalariesSerializer(instance=salary, context={'request': request})
+            return Response(serializer.data)
+        except Salaries.DoesNotExist:
+            return Response('500')
+
+
+
   
 
 
