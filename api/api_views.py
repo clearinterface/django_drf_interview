@@ -34,7 +34,10 @@ class SalariesAPIView(GenericAPIView):
             serializer = SalariesSerializer(instance=salary, context={'request': request})
             return Response(serializer.data)
         except Salaries.DoesNotExist:
-            return Response('500')
+            salary = Salaries.objects.create(**request.data)
+
+            serializer = SalariesSerializer(instance=salary, context={'request': request})
+            return Response(serializer.data)
 
 
 
